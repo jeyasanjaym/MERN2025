@@ -1,199 +1,49 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <title>Login Page</title>
+<html>
   <style>
-    body {
-      font-family: 'Segoe UI', sans-serif;
-      background: linear-gradient(135deg, #667eea, #764ba2);
-      display: flex;
-      height: 100vh;
-      align-items: center;
-      justify-content: center;
-      margin: 0;
+    .container{
+      display: grid;
+      grid-template-columns: 100px 100px 100px 100px;
+      grid-template-rows: 100px 100px 100px 100px;
+      gap: 10px;
     }
-
-    .login-box {
-      background: #fff;
-      padding: 30px 40px;
-      border-radius: 12px;
-      box-shadow: 0 10px 25px rgba(0,0,0,0.2);
-      width: 350px;
-      text-align: center;
+    .child{
+      border: 2px solid black;
+      padding: 10px;
+      background-color: orange;
     }
-
-    .login-box h2 {
-      margin-bottom: 20px;
-      color: #333;
+    .header{
+      grid-column: 1/5;
+      grid-row: 1;
     }
-
-    .input-group {
-      position: relative;
-      margin-bottom: 20px;
+    .sidebar{
+      grid-column: 1/2;
+      grid-row: 2/4;
     }
-
-    .input-group input {
-      width: 100%;
-      padding: 12px 40px 12px 40px;
-      border-radius: 8px;
-      border: 2px solid #ccc;
-      font-size: 16px;
-      outline: none;
-      transition: 0.3s;
+    .content{
+      grid-column: 2/5;
+      grid-row: 2/4;
     }
-
-    .input-group input:focus {
-      border-color: #667eea;
+    .footer{
+      grid-column: 1/5;
+      grid-row: 4;
     }
-
-    .input-group i {
-      position: absolute;
-      top: 50%;
-      left: 12px;
-      transform: translateY(-50%);
-      color: #888;
+    .sticky{
+      position: sticky;
+      top:0;
     }
-
-    .toggle-password {
-      position: absolute;
-      top: 50%;
-      right: 12px;
-      transform: translateY(-50%);
-      cursor: pointer;
-      color: #888;
-    }
-
-    .input-group.success input {
-      border-color: green;
-    }
-
-    .input-group.error input {
-      border-color: red;
-    }
-
-    .error-msg {
-      color: red;
-      font-size: 13px;
-      text-align: left;
-      margin-top: -15px;
-      margin-bottom: 10px;
-    }
-
-    .remember {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      font-size: 14px;
-      color: #555;
-      margin-bottom: 20px;
-    }
-
-    button {
-      width: 100%;
-      background: #667eea;
-      border: none;
-      padding: 12px;
-      color: white;
-      font-size: 16px;
-      border-radius: 8px;
-      cursor: pointer;
-      transition: background 0.3s;
-    }
-
-    button:hover {
-      background: #5a67d8;
-    }
-
-    .footer-text {
-      font-size: 13px;
-      color: #777;
-      margin-top: 15px;
+    body{
+      min-height: 1000vh;
     }
   </style>
-</head>
-<body>
-
-  <div class="login-box">
-    <h2>Login</h2>
-    <form id="loginForm">
-      <div class="input-group" id="userGroup">
-        <i class="fas fa-user"></i>
-        <input type="text" id="username" placeholder="Username">
-        <div class="error-msg" id="userError"></div>
-      </div>
-      <div class="input-group" id="passGroup">
-        <i class="fas fa-lock"></i>
-        <input type="password" id="password" placeholder="Password">
-        <i class="fas fa-eye toggle-password" onclick="togglePassword()"></i>
-        <div class="error-msg" id="passError"></div>
-      </div>
-      <div class="remember">
-        <label><input type="checkbox" id="remember"> Remember Me</label>
-        <a href="#" style="color:#667eea; text-decoration: none;">Forgot Password?</a>
-      </div>
-      <button type="submit">Login</button>
-      <p class="footer-text">Don't have an account? <a href="#" style="color:#667eea;">Sign up</a></p>
-    </form>
-  </div>
-
-  <!-- FontAwesome CDN for icons -->
-  <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
-
-  <script>
-    const form = document.getElementById("loginForm");
-    const username = document.getElementById("username");
-    const password = document.getElementById("password");
-    const userError = document.getElementById("userError");
-    const passError = document.getElementById("passError");
-    const userGroup = document.getElementById("userGroup");
-    const passGroup = document.getElementById("passGroup");
-
-    form.addEventListener("submit", function(e) {
-      e.preventDefault();
-      let valid = true;
-
-      if (username.value.trim() === "") {
-        userError.innerText = "Username is required";
-        userGroup.classList.add("error");
-        userGroup.classList.remove("success");
-        valid = false;
-      } else {
-        userError.innerText = "";
-        userGroup.classList.remove("error");
-        userGroup.classList.add("success");
-      }
-
-      if (password.value.trim().length < 6) {
-        passError.innerText = "Password must be at least 6 characters";
-        passGroup.classList.add("error");
-        passGroup.classList.remove("success");
-        valid = false;
-      } else {
-        passError.innerText = "";
-        passGroup.classList.remove("error");
-        passGroup.classList.add("success");
-      }
-
-      if (valid) {
-        alert("Login successful!");
-        // Redirect or further login actions here
-      }
-    });
-
-    function togglePassword() {
-      const pass = document.getElementById("password");
-      const icon = document.querySelector(".toggle-password");
-      if (pass.type === "password") {
-        pass.type = "text";
-        icon.classList.remove("fa-eye");
-        icon.classList.add("fa-eye-slash");
-      } else {
-        pass.type = "password";
-        icon.classList.remove("fa-eye-slash");
-        icon.classList.add("fa-eye");
-      }
-    }
-  </script>
-</body>
+  <body>
+    <div class ="container">
+      <div class="child header"></div>
+      <div class="child sidebar"></div>
+      <div class="child content"></div>
+      <div class="child footer"></div>
+    </div>
+    <div id="sticky">
+      <h1> hello</h1>
+    </div>
+  </body>
 </html>

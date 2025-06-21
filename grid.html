@@ -1,0 +1,41 @@
+<html>
+    <style>
+        #sticky{
+            top: 0;
+            position: sticky;
+
+        }
+        #fixed{
+            position: fixed;
+            top: 1.1;
+        }
+        body{
+            min-height: 1000vh  ;
+        }
+        #relative{
+            position: relative;
+        }
+        #absolute{
+            position: absolute;
+        }
+    </style>
+    <body>
+        <p>Important Notes:
+The parent of the sticky element must not have overflow: hidden or overflow: auto.
+
+z-index helps keep the sticky element above others.
+
+Sticky positioning works only within its containing block (the element’s parent).</p>
+        <div id="sticky">
+            <h1> sticky</h1></div>
+        <div id="fixed">
+            <h1>fixed</h1>
+        </div>
+        <div id="relative">
+            <h1>relative</h1>
+        </div>
+        <div id="absolute">
+            <h1>absolute</h1>
+        </div>
+        </body>
+</html>
