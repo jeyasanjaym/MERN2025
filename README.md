@@ -1,2 +1,1 @@
-# MERN2025
-repository for full stack class(mern)
+"# Full_stack_training-16-25-June-2025-" 
